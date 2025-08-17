@@ -1,0 +1,63 @@
+GET http://localhost:8080/public/health-check
+
+### Get Twice of the number
+POST http://localhost:8080/public/sum
+Content-Type: application/json
+
+{
+  "number": 5
+}
+
+### POST Request to Create a User
+POST http://localhost:8080/public/create-user
+Content-Type: application/json
+
+{
+  "userName": "Luffy",
+  "password": "password123"
+}
+
+### PUT Request to Update a User
+PUT http://localhost:8080/user
+Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+Content-Type: application/json
+
+{
+  "userName": "Luffy",
+  "password": "password123"
+}
+
+### DELETE Request to delete a User
+DELETE http://localhost:8080/user
+Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+
+### POST Request to Save an entry to a User
+POST http://localhost:8080/journal/Luffy
+Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+
+{
+  "title": "Morning",
+  "content": "Implemented all the CRUD operations."
+}
+
+### GET Request to Retrieve Journal Entries
+GET http://localhost:8080/journal/Luffy
+Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+
+### GET one Journal Entry by ID
+GET http://localhost:8080/journal/id/689f1cdc943f41e7043e8b61
+Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+
+### Delete one Journal Entry by ID
+DELETE http://localhost:8080/journal/id/Model/689f1cdc943f41e7043e8b61
+Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+
+### Update a Journal Entry
+PUT http://localhost:8080/journal/id/Model/689f1d69943f41e7043e8b64
+Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+Content-Type: application/json
+
+{
+  "title": "Morning",
+  "content": "Completed useDBRef"
+}

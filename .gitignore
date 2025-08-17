@@ -1,0 +1,10 @@
+target/
+
+### IntelliJ IDEA ###
+.idea
+
+### VS Code ###
+.vscode/
+
+### Maven ###
+.mvn/
