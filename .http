@@ -31,29 +31,34 @@ Content-Type: application/json
 DELETE http://localhost:8080/user
 Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
 
+
+#################### Journal Routes ####################
+
+
 ### POST Request to Save an entry to a User
-POST http://localhost:8080/journal/Luffy
+POST http://localhost:8080/journal
 Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+Content-Type: application/json
 
 {
-  "title": "Morning",
-  "content": "Implemented all the CRUD operations."
+  "title": "Block your mediocre freinds",
+  "content": "If you do better than them, they will try to pull you down to their level"
 }
 
 ### GET Request to Retrieve Journal Entries
-GET http://localhost:8080/journal/Luffy
+GET http://localhost:8080/journal
 Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
 
 ### GET one Journal Entry by ID
-GET http://localhost:8080/journal/id/689f1cdc943f41e7043e8b61
+GET http://localhost:8080/journal/id/68a2de56d1da1f21ca8671be
 Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
 
 ### Delete one Journal Entry by ID
-DELETE http://localhost:8080/journal/id/Model/689f1cdc943f41e7043e8b61
+DELETE http://localhost:8080/journal/id/68a2de56d1da1f21ca8671be
 Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
 
 ### Update a Journal Entry
-PUT http://localhost:8080/journal/id/Model/689f1d69943f41e7043e8b64
+PUT http://localhost:8080/journal/id/68a2deecd1da1f21ca8671bf
 Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
 Content-Type: application/json
 

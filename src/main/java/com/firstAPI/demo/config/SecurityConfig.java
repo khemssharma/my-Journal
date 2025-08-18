@@ -1,6 +1,6 @@
-package com.portfolio.journalApp.config;
+package com.firstAPI.demo.config;
 
-import com.portfolio.journalApp.services.UserDetailsServiceImpl;
+import com.firstAPI.demo.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

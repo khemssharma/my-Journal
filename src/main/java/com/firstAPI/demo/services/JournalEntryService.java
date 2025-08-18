@@ -1,8 +1,8 @@
-package com.portfolio.journalApp.services;
+package com.firstAPI.demo.services;
 
-import com.portfolio.journalApp.entity.JournalEntry;
-import com.portfolio.journalApp.entity.User;
-import com.portfolio.journalApp.repository.JournalEntryRepository;
+import com.firstAPI.demo.entity.JournalEntry;
+import com.firstAPI.demo.entity.User;
+import com.firstAPI.demo.repository.JournalEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,12 +29,12 @@ public class JournalEntryService {
         JournalEntry savedEntry = journalEntryRepository.save(journalEntry);
         user.getJournalEntries().add(savedEntry);
         // user.setUserName(null); // this line was used to test @Transactional
-        userService.save(user);
+        userService.saveUser(user);
     }
     public void saveEntry(JournalEntry journalEntry) {
         journalEntryRepository.save(journalEntry);
     }
-    public List<JournalEntry> findAll() {
+    public List<JournalEntry> getJournalEntries() {
         return journalEntryRepository.findAll();
     }
     public Optional<JournalEntry> findById(ObjectId id) {
@@ -43,7 +43,7 @@ public class JournalEntryService {
     public void deleteById(ObjectId id, String userName) {
         User user = userService.findByUserName(userName);
         user.getJournalEntries().removeIf(x -> x.getId().equals(id));
-        userService.save(user);
+        userService.saveUser(user);
         journalEntryRepository.deleteById(id);
-    }   
+    }
 }

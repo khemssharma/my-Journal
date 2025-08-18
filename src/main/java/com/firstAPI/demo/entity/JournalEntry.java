@@ -1,4 +1,4 @@
-package com.portfolio.journalApp.entity;
+package com.firstAPI.demo.entity;
 
 import java.time.LocalDateTime;
 

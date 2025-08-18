@@ -1,7 +1,7 @@
-package com.portfolio.journalApp.controllers;
+package com.firstAPI.demo.controllers;
 
-import com.portfolio.journalApp.entity.User;
-import com.portfolio.journalApp.services.UserService;
+import com.firstAPI.demo.entity.User;
+import com.firstAPI.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class PublicController {
     @PostMapping("create-user")
     public ResponseEntity<User> createEntry(@RequestBody User myEntry){
         try {
-            User savedEntry = userService.save(myEntry);
+            User savedEntry = userService.saveNewUser(myEntry);
             return new ResponseEntity<>(savedEntry, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

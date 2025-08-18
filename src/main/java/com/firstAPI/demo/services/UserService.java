@@ -1,7 +1,7 @@
-package com.portfolio.journalApp.services;
+package com.firstAPI.demo.services;
 
-import com.portfolio.journalApp.entity.User;
-import com.portfolio.journalApp.repository.UserRepository;
+import com.firstAPI.demo.entity.User;
+import com.firstAPI.demo.repository.UserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,18 +18,24 @@ public class UserService {
     private UserRepository userRepository;
     
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    public User save(User user) {
+    public User saveNewUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Arrays.asList("USER"));
         return userRepository.save(user);
     }
+
+    public void saveUser(User user){
+        userRepository.save(user);
+    }
+
     public List<User> findAll() {
-        return userRepository.findAll();
+        return userRepository.findAll(); //FOR ADMIN USER ROLE
     }
     public User findByUserName(String userName) {
         return userRepository.findByUserName(userName);
-    }   
-    public void deleteById(ObjectId id) {
-        userRepository.deleteById(id);
+    }
+
+    public void deleteByUserName(String userName) {
+        userRepository.deleteByUserName(userName);
     } 
 }

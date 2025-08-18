@@ -1,7 +1,7 @@
-package com.portfolio.journalApp.services;
+package com.firstAPI.demo.services;
 
-import com.portfolio.journalApp.entity.User;
-import com.portfolio.journalApp.repository.UserRepository;
+import com.firstAPI.demo.entity.User;
+import com.firstAPI.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

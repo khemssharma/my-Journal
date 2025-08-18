@@ -8,8 +8,8 @@
 		<version>3.5.4</version>
 		<relativePath/>
 	</parent>
-	<groupId>com.portfolio</groupId>
-	<artifactId>journalApp</artifactId>
+	<groupId>com.firstAPI</groupId>
+	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>

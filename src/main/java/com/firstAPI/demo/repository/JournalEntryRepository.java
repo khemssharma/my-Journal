@@ -1,6 +1,6 @@
-package com.portfolio.journalApp.repository;
+package com.firstAPI.demo.repository;
 
-import com.portfolio.journalApp.entity.JournalEntry;
+import com.firstAPI.demo.entity.JournalEntry;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
