@@ -1,0 +1,6 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://ayushsharma3310:461xvk6tGTRhXhn7@cluster0.qwzc1.mongodb.net/journal-app?retryWrites=true&w=majority&appName=Cluster0
+      auto-index-creation: true
+      database: journal-app

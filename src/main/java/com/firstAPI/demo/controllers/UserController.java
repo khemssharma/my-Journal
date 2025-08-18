@@ -1,6 +1,7 @@
 package com.firstAPI.demo.controllers;
 import com.firstAPI.demo.entity.User;
 import com.firstAPI.demo.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
 
     @Autowired
@@ -25,6 +27,7 @@ public class UserController {
             Authentication Authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = Authentication.getName();
             User userInDB = userService.findByUserName(username);
+            log.info("This is a Log");
             if (userInDB != null){
                 userInDB.setUserName(user.getUserName());
                 userInDB.setPassword(passwordEncoder.encode(user.getPassword()));
