@@ -2,7 +2,6 @@ package com.firstAPI.demo.services;
 
 import com.firstAPI.demo.entity.User;
 import com.firstAPI.demo.repository.UserRepository;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,6 +24,12 @@ public class UserService {
     }
 
     public void saveUser(User user){
+        userRepository.save(user);
+    }
+
+    public void saveAdmin(User user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(Arrays.asList("USER", "ADMIN"));
         userRepository.save(user);
     }
 

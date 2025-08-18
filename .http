@@ -66,3 +66,19 @@ Content-Type: application/json
   "title": "Morning",
   "content": "Completed useDBRef"
 }
+
+#################### Admin Routes ####################
+
+### Get all Users
+GET http://localhost:8080/admin/all-users
+Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+
+### Make a User an Admin
+POST http://localhost:8080/admin/create-admin-user
+Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+Content-Type: application/json
+
+{
+  "userName": "Nami",
+  "password": "password123"
+}
