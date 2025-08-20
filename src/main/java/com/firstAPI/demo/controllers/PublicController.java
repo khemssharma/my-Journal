@@ -1,14 +1,19 @@
 package com.firstAPI.demo.controllers;
 
 import com.firstAPI.demo.entity.User;
+import com.firstAPI.demo.services.UserDetailsServiceImpl;
 import com.firstAPI.demo.services.UserService;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/public")
+@Slf4j
 public class PublicController {
 
     @Autowired
@@ -34,9 +39,9 @@ public class PublicController {
         return request.getNumber() * 2;
     }
 
+    @Getter
     public static class NumberRequest {
         private int number;
-        public int getNumber() { return number; }
-        public void setNumber(int number) { this.number = number; }
+        
     }
 }
