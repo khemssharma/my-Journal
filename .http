@@ -17,6 +17,16 @@ Content-Type: application/json
   "password": "password123"
 }
 
+### POST Request to Login User
+POST http://localhost:8080/public/login
+Content-Type: application/json
+
+{
+  "userName": "Luffy",
+  "password": "password123"
+}
+
+
 ### PUT Request to Update a User
 PUT http://localhost:8080/user
 Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=

@@ -3,6 +3,8 @@ package com.firstAPI.demo.services;
 import com.firstAPI.demo.entity.User;
 import com.firstAPI.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,11 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private JwtService jwtService;
+
+    Authentication Authentication = SecurityContextHolder.getContext().getAuthentication();
     
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     public User saveNewUser(User user) {
@@ -42,5 +49,21 @@ public class UserService {
 
     public void deleteByUserName(String userName) {
         userRepository.deleteByUserName(userName);
-    } 
+    }
+    public String verify(User user) {
+        User dbUser = userRepository.findByUserName(user.getUserName());
+
+        if (dbUser == null) {
+            throw new RuntimeException("User not found");
+        }
+
+        // Compare passwords using BCrypt
+        if (!passwordEncoder.matches(user.getPassword(), dbUser.getPassword())) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        // Generate JWT token for this user
+        return jwtService.generateToken(dbUser.getUserName());
+    }
+
 }

@@ -1,14 +1,12 @@
 package com.firstAPI.demo.controllers;
 
 import com.firstAPI.demo.entity.User;
-import com.firstAPI.demo.services.UserDetailsServiceImpl;
 import com.firstAPI.demo.services.UserService;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -43,5 +41,16 @@ public class PublicController {
     public static class NumberRequest {
         private int number;
         
+    }
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody User user) {
+        try {
+            String token = userService.verify(user);
+            return ResponseEntity.ok(token); // return token with 200 OK
+        } catch (Exception e) {
+            log.error("Error occurred while authenticating the user.", e);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                                .body("Invalid username or password");
+        }
     }
 }
