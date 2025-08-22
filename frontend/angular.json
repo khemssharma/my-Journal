@@ -3,11 +3,11 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "journal-app": {
+    "angular-registration-login-example": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "less"
         }
       },
       "root": "",
@@ -15,85 +15,96 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "browser": "src/main.ts",
+            "outputPath": "dist/angular-registration-login-example",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
+            "inlineStyleLanguage": "less",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.less"
             ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
             },
             "development": {
+              "buildOptimizer": false,
               "optimization": false,
+              "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular/build:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "journal-app:build:production"
+              "browserTarget": "angular-registration-login-example:build:production"
             },
             "development": {
-              "buildTarget": "journal-app:build:development"
+              "browserTarget": "angular-registration-login-example:build:development"
             }
           },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular/build:extract-i18n"
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "angular-registration-login-example:build"
+          }
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
+            "karmaConfig": "karma.conf.js",
+            "inlineStyleLanguage": "less",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
-            ]
+              "src/styles.less"
+            ],
+            "scripts": []
           }
         }
       }
     }
   },
   "cli": {
-    "analytics": "2753ab66-a3bd-4175-a838-46832f550f33"
+    "analytics": "7d8aca67-3946-4abc-aced-a110f910ecd1"
   }
 }
