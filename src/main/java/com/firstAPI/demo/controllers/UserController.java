@@ -1,5 +1,6 @@
 package com.firstAPI.demo.controllers;
 import com.firstAPI.demo.entity.User;
+import com.firstAPI.demo.services.JwtService;
 import com.firstAPI.demo.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,34 +20,49 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JwtService jwtService;
+
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    // 🟢 Update user with JWT authentication
     @PutMapping
-    public ResponseEntity<?> updateUser(@RequestBody User user) {
+    public ResponseEntity<?> updateUser(@RequestHeader("Authorization") String authHeader,
+                                        @RequestBody User user) {
         try {
-            Authentication Authentication = SecurityContextHolder.getContext().getAuthentication();
-            String username = Authentication.getName();
+            // Extract token from "Bearer <token>"
+            String token = authHeader.substring(7);
+            String username = jwtService.extractUsername(token);
+
             User userInDB = userService.findByUserName(username);
-            log.info("This is a Log");
-            if (userInDB != null){
+
+            if (userInDB != null) {
                 userInDB.setUserName(user.getUserName());
                 userInDB.setPassword(passwordEncoder.encode(user.getPassword()));
                 userService.saveUser(userInDB);
-                return new ResponseEntity<>(HttpStatus.OK);
+                return ResponseEntity.ok("User updated successfully");
             }
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+
         } catch (Exception e) {
-            throw new RuntimeException("Error updating user", e);
+            log.error("Error updating user", e);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired token");
         }
     }
+
+    // 🟢 Delete user with JWT authentication
     @DeleteMapping
-    public ResponseEntity<?> deleteUser() {
+    public ResponseEntity<?> deleteUser(@RequestHeader("Authorization") String authHeader) {
         try {
-            Authentication Authentication = SecurityContextHolder.getContext().getAuthentication();
-            userService.deleteByUserName(Authentication.getName());
-            return new ResponseEntity<>(HttpStatus.OK);
+            String token = authHeader.substring(7);
+            String username = jwtService.extractUsername(token);
+
+            userService.deleteByUserName(username);
+            return ResponseEntity.ok("User deleted successfully");
+
         } catch (Exception e) {
-            throw new RuntimeException("Error deleting user", e);
+            log.error("Error deleting user", e);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired token");
         }
     }
 }

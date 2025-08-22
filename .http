@@ -27,9 +27,12 @@ Content-Type: application/json
 }
 
 
+#################### User Routes ####################
+
+
 ### PUT Request to Update a User
 PUT http://localhost:8080/user
-Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZmeSIsImlhdCI6MTc1NTg1NTcwNywiZXhwIjoxNzU1ODU5MzA3fQ.iQvjStr4drPXrgO82Wd86CM8AJUm2vbh_NkVg_o2dhs
 Content-Type: application/json
 
 {
@@ -39,7 +42,7 @@ Content-Type: application/json
 
 ### DELETE Request to delete a User
 DELETE http://localhost:8080/user
-Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZmeSIsImlhdCI6MTc1NTg1NTYxNCwiZXhwIjoxNzU1ODU5MjE0fQ.54SPsUPTN_uK-Lv6e0NdmQQPwKXQJDuCVU3BmMGv4jE
 
 
 #################### Journal Routes ####################
@@ -47,7 +50,7 @@ Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
 
 ### POST Request to Save an entry to a User
 POST http://localhost:8080/journal
-Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZmeSIsImlhdCI6MTc1NTg1NTc0NSwiZXhwIjoxNzU1ODU5MzQ1fQ.8JFhYUWfRY1volgwb1u7-Sgyog2ef9cyC5oThpXd8GE
 Content-Type: application/json
 
 {
@@ -57,19 +60,19 @@ Content-Type: application/json
 
 ### GET Request to Retrieve Journal Entries
 GET http://localhost:8080/journal
-Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZmeSIsImlhdCI6MTc1NTg1NTc0NSwiZXhwIjoxNzU1ODU5MzQ1fQ.8JFhYUWfRY1volgwb1u7-Sgyog2ef9cyC5oThpXd8GE
 
 ### GET one Journal Entry by ID
 GET http://localhost:8080/journal/id/68a2de56d1da1f21ca8671be
-Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZmeSIsImlhdCI6MTc1NTg1NTc0NSwiZXhwIjoxNzU1ODU5MzQ1fQ.8JFhYUWfRY1volgwb1u7-Sgyog2ef9cyC5oThpXd8GE
 
 ### Delete one Journal Entry by ID
 DELETE http://localhost:8080/journal/id/68a2de56d1da1f21ca8671be
-Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZmeSIsImlhdCI6MTc1NTg1NTc0NSwiZXhwIjoxNzU1ODU5MzQ1fQ.8JFhYUWfRY1volgwb1u7-Sgyog2ef9cyC5oThpXd8GE
 
 ### Update a Journal Entry
 PUT http://localhost:8080/journal/id/68a2deecd1da1f21ca8671bf
-Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZmeSIsImlhdCI6MTc1NTg1NTc0NSwiZXhwIjoxNzU1ODU5MzQ1fQ.8JFhYUWfRY1volgwb1u7-Sgyog2ef9cyC5oThpXd8GE
 Content-Type: application/json
 
 {
@@ -81,11 +84,11 @@ Content-Type: application/json
 
 ### Get all Users
 GET http://localhost:8080/admin/all-users
-Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZmeSIsImlhdCI6MTc1NTg1NTc0NSwiZXhwIjoxNzU1ODU5MzQ1fQ.8JFhYUWfRY1volgwb1u7-Sgyog2ef9cyC5oThpXd8GE
 
 ### Make a User an Admin
 POST http://localhost:8080/admin/create-admin-user
-Authorization: Basic THVmZnk6cGFzc3dvcmQxMjM=
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZmeSIsImlhdCI6MTc1NTg1NTc0NSwiZXhwIjoxNzU1ODU5MzQ1fQ.8JFhYUWfRY1volgwb1u7-Sgyog2ef9cyC5oThpXd8GE
 Content-Type: application/json
 
 {
