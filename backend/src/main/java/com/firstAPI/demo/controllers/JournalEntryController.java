@@ -19,7 +19,6 @@ import org.bson.types.ObjectId;
 
 @RestController
 @RequestMapping("/journal")
-@CrossOrigin(origins = "http://localhost:4200") 
 
 public class JournalEntryController {
 

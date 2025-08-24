@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Auth } from '../../services/auth';
 
 @Component({
@@ -16,17 +17,19 @@ export class Login {
   errorMessage = '';
   rememberMe = false;
 
-  constructor(private authService: Auth) {}
+  constructor(private authService: Auth, private router: Router) {}
 
   onLogin(): void {
     this.authService.login(this.userName, this.password).subscribe({
       next: (token: string) => {
-        console.log('JWT:', token);
+        // Always store JWT in localStorage
         localStorage.setItem('jwt', token);
-        alert('Login successful!');
+
+        // Navigate to home page
+        this.router.navigate(['/']);
       },
       error: () => {
-        this.errorMessage = 'Login failed';
+        this.errorMessage = 'Invalid username or password';
       }
     });
   }

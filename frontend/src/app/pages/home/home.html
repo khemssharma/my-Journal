@@ -1,1 +1,20 @@
-<p>home works!</p>
+<div class="home-container">
+  <h2>Home</h2>
+
+  <div *ngIf="healthStatus">
+    <strong>Health Check:</strong> {{ healthStatus }}
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="journals.length > 0">
+    <h3>Your Journals</h3>
+    <ul>
+      <li *ngFor="let journal of journals">
+        <strong>{{ journal.title }}</strong> - {{ journal.content }}
+      </li>
+    </ul>
+  </div>
+</div>

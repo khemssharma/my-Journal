@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/public")
 @Slf4j
-@CrossOrigin(origins = "http://localhost:4200") 
 public class PublicController {
 
     @Autowired

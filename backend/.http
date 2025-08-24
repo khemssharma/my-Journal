@@ -50,7 +50,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZmeSIsImlhdCI6MTc1NTg1N
 
 ### POST Request to Save an entry to a User
 POST http://localhost:8080/journal
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZmeSIsImlhdCI6MTc1NTg1NTc0NSwiZXhwIjoxNzU1ODU5MzQ1fQ.8JFhYUWfRY1volgwb1u7-Sgyog2ef9cyC5oThpXd8GE
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZmeSIsImlhdCI6MTc1NjAzOTM0NCwiZXhwIjoxNzU2MDQyOTQ0fQ.aDoOZvFfxMiuzm3GGds7rubAz2aq3VFY7Q8JNG4VOQA
 Content-Type: application/json
 
 {
@@ -60,7 +60,7 @@ Content-Type: application/json
 
 ### GET Request to Retrieve Journal Entries
 GET http://localhost:8080/journal
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZmeSIsImlhdCI6MTc1NTg1NTc0NSwiZXhwIjoxNzU1ODU5MzQ1fQ.8JFhYUWfRY1volgwb1u7-Sgyog2ef9cyC5oThpXd8GE
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZmeSIsImlhdCI6MTc1NjAzOTM0NCwiZXhwIjoxNzU2MDQyOTQ0fQ.aDoOZvFfxMiuzm3GGds7rubAz2aq3VFY7Q8JNG4VOQA
 
 ### GET one Journal Entry by ID
 GET http://localhost:8080/journal/id/68a2de56d1da1f21ca8671be
