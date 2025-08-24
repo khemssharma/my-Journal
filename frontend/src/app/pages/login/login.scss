@@ -1,0 +1,107 @@
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(120deg, #fdfbfb, #ebedee);
+  font-family: 'Merriweather', serif;
+}
+
+.card {
+  width: 400px;
+  background: #fffdf8;
+  border-radius: 1.5rem;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  text-align: center;
+  animation: fadeInUp 0.8s ease;
+}
+
+.card-header {
+  font-size: 1.4rem;
+  font-family: 'Dancing Script', cursive;
+  color: #6b4f4f;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+  text-align: left;
+
+  label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    color: #4b3832;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #d6ccc2;
+    border-radius: 0.75rem;
+    background: #fffaf6;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: #a98467;
+      box-shadow: 0 0 0 3px rgba(169, 132, 103, 0.3);
+    }
+  }
+
+  .error-message {
+    font-size: 0.8rem;
+    color: #d9534f;
+    margin-top: 0.3rem;
+    display: none;
+  }
+}
+
+.extra-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  margin: 0.5rem 0 1.2rem;
+
+  .forgot-link {
+    color: #6b4f4f;
+    text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #a98467;
+      text-decoration: underline;
+    }
+  }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .btn-primary {
+    background: #a98467;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.6rem;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #8c6c52;
+    }
+  }
+
+  .btn-link {
+    color: #6b4f4f;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

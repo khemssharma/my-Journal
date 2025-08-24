@@ -1,28 +1,34 @@
-<div class="card">
-    <h4 class="card-header">Login</h4>
+<div class="login-container">
+  <div class="card">
+    <h2 class="card-header">Welcome back to your journal ✨</h2>
     <div class="card-body">
-        <form >
-            <div >
-                <label >Username</label>
-                <input />
-                <div >
-                    <div>Username is required</div>
-                </div>
-            </div>
-            <div >
-                <label >Password</label>
-                <input type="password" />
-                <div >
-                    <div >Password is required</div>
-                </div>
-            </div>
-            <div>
-                <button >
-                    <span></span>
-                    Login
-                </button>
-                <a class="btn btn-link">Register</a>
-            </div>
-        </form>
+      <form>
+        <!-- Username -->
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input id="username" type="text" placeholder="your name..." />
+          <div class="error-message">Username is required</div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="••••••••" />
+          <div class="error-message">Password is required</div>
+        </div>
+
+        <!-- Remember me + Forgot -->
+        <div class="extra-options">
+          <label><input type="checkbox" /> Remember me</label>
+          <a class="forgot-link" href="#">Forgot password?</a>
+        </div>
+
+        <!-- Actions -->
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Login</button>
+          <a class="btn-link" routerLink="/register">Create Account</a>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
