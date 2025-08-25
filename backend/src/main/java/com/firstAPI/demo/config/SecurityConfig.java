@@ -74,7 +74,6 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         // Angular dev server origin
         configuration.setAllowedOrigins(List.of(
-            "http://localhost:3000",
             "https://my-journal-rust.vercel.app"
         ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
