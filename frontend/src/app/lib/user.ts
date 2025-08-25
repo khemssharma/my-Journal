@@ -9,7 +9,7 @@ export async function createUser(userName: string, password: string) {
 }
 
 export async function login(userName: string, password: string) {
-  const res = await fetch("http://localhost:8080/public/login", {
+  const res = await fetch("https://my-journal-rust.vercel.app", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ userName, password })

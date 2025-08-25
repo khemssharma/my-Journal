@@ -1,5 +1,5 @@
 // lib/api.ts
-export const API_URL = "http://localhost:8080";
+export const API_URL = "https://my-journal-rust.vercel.app";
 
 export function getToken(): string | null {
   return typeof window !== "undefined" ? localStorage.getItem("jwt") : null;
