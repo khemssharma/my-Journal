@@ -37,9 +37,9 @@ export async function apiFetch<T>(
 
   if (!res.ok) throw new Error(await res.text());
 
-  if (responseType === "text") {
-    // @ts-ignore
-    return res.text();
-  }
+  // if (responseType === "text") {
+  //   // @ts-ignore
+  //   return res.text();
+  // }
   return res.json();
 }
