@@ -5,27 +5,27 @@ export function getToken(): string | null {
   return typeof window !== "undefined" ? localStorage.getItem("jwt") : null;
 }
 
-export function setToken(token: string) {
+export function setToken(token: string): void {
   if (typeof window !== "undefined") {
     localStorage.setItem("jwt", token);
   }
 }
 
-export function clearToken() {
+export function clearToken(): void {
   if (typeof window !== "undefined") {
     localStorage.removeItem("jwt");
   }
 }
 
-export function authHeaders() {
+export function authHeaders(): Record<string, string> {
   const token = getToken();
   return {
     "Content-Type": "application/json",
-    ...(token ? { Authorization: `Bearer ${token}` } : {})
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
   };
 }
 
-export async function apiFetch<T>(
+export async function apiFetch<T = unknown>(
   path: string,
   options: RequestInit = {},
   responseType: "json" | "text" = "json"
@@ -35,11 +35,14 @@ export async function apiFetch<T>(
     headers: { ...authHeaders(), ...(options.headers || {}) },
   });
 
-  if (!res.ok) throw new Error(await res.text());
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(`HTTP ${res.status}: ${errorText}`);
+  }
 
-  // if (responseType === "text") {
-  //   // @ts-ignore
-  //   return res.text();
-  // }
-  return res.json();
+  if (responseType === "text") {
+    return (await res.text()) as T;
+  }
+
+  return (await res.json()) as T;
 }
