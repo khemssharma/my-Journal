@@ -25,12 +25,21 @@ export function authHeaders() {
   };
 }
 
-export async function apiFetch<T>(path: string, options: RequestInit = {}): Promise<T> {
+export async function apiFetch<T>(
+  path: string,
+  options: RequestInit = {},
+  responseType: "json" | "text" = "json"
+): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, {
     ...options,
     headers: { ...authHeaders(), ...(options.headers || {}) },
   });
 
   if (!res.ok) throw new Error(await res.text());
+
+  if (responseType === "text") {
+    // @ts-ignore
+    return res.text();
+  }
   return res.json();
 }

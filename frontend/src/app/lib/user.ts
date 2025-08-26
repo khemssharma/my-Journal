@@ -9,14 +9,12 @@ export async function createUser(userName: string, password: string) {
 }
 
 export async function login(userName: string, password: string) {
-  const res = await apiFetch("/public/login", {
+  const token = await apiFetch<string>("/public/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ userName, password })
-  }) as Response;
+  }, "text");
 
-  if (!res.ok) throw new Error(await res.text());
-  const token = await res.text(); 
   setToken(token);
   return token;
 }
