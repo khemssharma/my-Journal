@@ -6,8 +6,8 @@ import { login, createUser } from "./lib/user";
 import { getEntries, createEntry, JournalEntry } from "./lib/journal";
 
 export default function HomePage() {
-  const [userName, setUserName] = useState("Luffy");
-  const [password, setPassword] = useState("password123");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const [journals, setJournals] = useState<JournalEntry[]>([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
