@@ -9,14 +9,14 @@ export async function createUser(userName: string, password: string) {
 }
 
 export async function login(userName: string, password: string) {
-  const res = await fetch("https://my-journal-1.onrender.com", {
+  const res = await apiFetch("/public/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ userName, password })
-  });
+  }) as Response;
 
   if (!res.ok) throw new Error(await res.text());
-  const token = await res.text(); // backend returns JWT as plain text
+  const token = await res.text(); 
   setToken(token);
   return token;
 }
