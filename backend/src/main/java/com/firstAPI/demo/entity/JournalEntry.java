@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class JournalEntry {
 
     @Id
-    private ObjectId id;
+    private String id;
     private String title;
     private String content;
     private LocalDateTime date;
