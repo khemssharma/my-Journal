@@ -1,4 +1,3 @@
-// app/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -13,6 +12,10 @@ export default function HomePage() {
   const [content, setContent] = useState("");
 
   async function handleLogin() {
+    if (!userName.trim() || !password.trim()) {
+      alert("Username and password cannot be empty.");
+      return;
+    }
     try {
       await login(userName, password);
       alert("Logged in!");
@@ -23,6 +26,10 @@ export default function HomePage() {
   }
 
   async function handleSignup() {
+    if (!userName.trim() || !password.trim()) {
+      alert("Username and password cannot be empty.");
+      return;
+    }
     try {
       await createUser(userName, password);
       alert("User created! Now login.");
@@ -41,6 +48,10 @@ export default function HomePage() {
   }
 
   async function handleCreateEntry() {
+    if (!title.trim() || !content.trim()) {
+      alert("Title and content cannot be empty.");
+      return;
+    }
     try {
       await createEntry(title, content);
       setTitle("");
@@ -59,6 +70,7 @@ export default function HomePage() {
     <div className="p-6 max-w-2xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Journal App</h1>
 
+      {/* Signup / Login */}
       <div className="mb-6">
         <input
           className="border p-2 mr-2"
@@ -73,14 +85,21 @@ export default function HomePage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="bg-green-500 text-white px-4 py-2 mr-2" onClick={handleSignup}>
+        <button
+          className="bg-green-500 text-white px-4 py-2 mr-2"
+          onClick={handleSignup}
+        >
           Signup
         </button>
-        <button className="bg-blue-500 text-white px-4 py-2" onClick={handleLogin}>
+        <button
+          className="bg-blue-500 text-white px-4 py-2"
+          onClick={handleLogin}
+        >
           Login
         </button>
       </div>
 
+      {/* New Entry */}
       <div className="mb-6">
         <h2 className="text-xl font-semibold mb-2">New Journal Entry</h2>
         <input
@@ -95,18 +114,24 @@ export default function HomePage() {
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-        <button className="bg-purple-500 text-white px-4 py-2" onClick={handleCreateEntry}>
+        <button
+          className="bg-purple-500 text-white px-4 py-2"
+          onClick={handleCreateEntry}
+        >
           Save Entry
         </button>
       </div>
 
+      {/* Journals */}
       <div>
         <h2 className="text-xl font-semibold mb-2">Your Journals</h2>
         {journals.map((j) => (
           <div key={j.id.timestamp} className="mb-4 p-4 border rounded">
             <h3 className="text-lg font-bold">{j.title}</h3>
             <p>{j.content}</p>
-            <small className="text-gray-500">{new Date(j.date).toLocaleString()}</small>
+            <small className="text-gray-500">
+              {new Date(j.date).toLocaleString()}
+            </small>
           </div>
         ))}
       </div>
