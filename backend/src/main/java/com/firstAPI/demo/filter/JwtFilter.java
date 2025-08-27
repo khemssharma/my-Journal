@@ -29,6 +29,14 @@ public class JwtFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
+        String path = request.getRequestURI();
+
+        // 🚀 Skip JWT check for public endpoints
+        if (path.startsWith("/public")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         final String authHeader = request.getHeader("Authorization");
         String username = null;
         String token = null;
@@ -36,7 +44,11 @@ public class JwtFilter extends OncePerRequestFilter {
         // Check if header is Bearer token
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7);
-            username = jwtService.extractUsername(token);
+            try {
+                username = jwtService.extractUsername(token);
+            } catch (Exception e) {
+                // invalid or expired token → skip, let security config block if needed
+            }
         }
 
         // Validate and set authentication
