@@ -13,7 +13,7 @@ export async function login(userName: string, password: string) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ userName, password })
-  });
+  }, "text");
 
   setToken(token);
   return token;
