@@ -27,11 +27,6 @@ export async function getEntries(): Promise<JournalEntry[]> {
   return apiFetch<JournalEntry[]>("/journal");
 }
 
-// Read one
-export async function getEntryById(id: string): Promise<JournalEntry> {
-  return apiFetch<JournalEntry>(`/journal/id/${id}`);
-}
-
 // Update
 export async function updateEntry(
   id: string,

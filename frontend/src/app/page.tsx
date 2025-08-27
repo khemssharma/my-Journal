@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { login, createUser } from "./lib/user";
-import { getEntries, createEntry, JournalEntry } from "./lib/journal";
+import {
+  getEntries,
+  createEntry,
+  updateEntry,
+  deleteEntry,
+  JournalEntry,
+} from "./lib/journal";
 
 export default function HomePage() {
   const [userName, setUserName] = useState("");
@@ -10,6 +16,7 @@ export default function HomePage() {
   const [journals, setJournals] = useState<JournalEntry[]>([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   async function handleLogin() {
     if (!userName.trim() || !password.trim()) {
@@ -53,13 +60,38 @@ export default function HomePage() {
       return;
     }
     try {
-      await createEntry(title, content);
+      if (editingId) {
+        // update
+        await updateEntry(editingId, { title, content });
+        setEditingId(null);
+        alert("Entry updated!");
+      } else {
+        // create
+        await createEntry(title, content);
+        alert("Entry created!");
+      }
       setTitle("");
       setContent("");
       loadJournals();
     } catch (err: unknown) {
       alert(err);
     }
+  }
+
+  async function handleDelete(id: string ) {
+    if (!confirm("Are you sure you want to delete this entry?")) return;
+    try {
+      await deleteEntry(id);
+      loadJournals();
+    } catch (err: unknown) {
+      alert(err);
+    }
+  }
+
+  function handleEdit(entry: JournalEntry) {
+    setTitle(entry.title);
+    setContent(entry.content);
+    setEditingId(entry.id.timestamp); // assuming id has timestamp
   }
 
   useEffect(() => {
@@ -99,9 +131,11 @@ export default function HomePage() {
         </button>
       </div>
 
-      {/* New Entry */}
+      {/* New or Edit Entry */}
       <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">New Journal Entry</h2>
+        <h2 className="text-xl font-semibold mb-2">
+          {editingId ? "Edit Journal Entry" : "New Journal Entry"}
+        </h2>
         <input
           className="border p-2 w-full mb-2"
           placeholder="Title"
@@ -118,8 +152,20 @@ export default function HomePage() {
           className="bg-purple-500 text-white px-4 py-2"
           onClick={handleCreateEntry}
         >
-          Save Entry
+          {editingId ? "Update Entry" : "Save Entry"}
         </button>
+        {editingId && (
+          <button
+            className="bg-gray-500 text-white px-4 py-2 ml-2"
+            onClick={() => {
+              setEditingId(null);
+              setTitle("");
+              setContent("");
+            }}
+          >
+            Cancel
+          </button>
+        )}
       </div>
 
       {/* Journals */}
@@ -132,6 +178,20 @@ export default function HomePage() {
             <small className="text-gray-500">
               {new Date(j.date).toLocaleString()}
             </small>
+            <div className="mt-2">
+              <button
+                className="bg-yellow-500 text-white px-3 py-1 mr-2"
+                onClick={() => handleEdit(j)}
+              >
+                Edit
+              </button>
+              <button
+                className="bg-red-500 text-white px-3 py-1"
+                onClick={() => handleDelete(j.id.timestamp)}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         ))}
       </div>
