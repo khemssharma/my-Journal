@@ -1,5 +1,5 @@
 // lib/api.ts
-export const API_URL = "https://my-journal-1.onrender.com";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export function getToken(): string | null {
   return typeof window !== "undefined" ? localStorage.getItem("jwt") : null;
