@@ -17,32 +17,33 @@ export function clearToken(): void {
   }
 }
 
-export function authHeaders(): Record<string, string> {
+export async function apiFetch<T>(path: string, options: RequestInit = {}): Promise<T> {
   const token = getToken();
-  return {
+  const headers: HeadersInit = {
     "Content-Type": "application/json",
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...options.headers,
   };
-}
 
-export async function apiFetch<T = unknown>(
-  path: string,
-  options: RequestInit = {},
-  responseType: "json" | "text" = "json"
-): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, {
     ...options,
-    headers: { ...authHeaders(), ...(options.headers || {}) },
+    headers,
   });
 
   if (!res.ok) {
-    const errorText = await res.text();
-    throw new Error(`HTTP ${res.status}: ${errorText}`);
+    throw new Error(`API error: ${res.status}`);
   }
 
-  if (responseType === "text") {
-    return (await res.text()) as T;
+  // ✅ If no content, return undefined (for DELETE, etc.)
+  if (res.status === 204) {
+    return undefined as T;
   }
 
-  return (await res.json()) as T;
+  // ✅ Handle empty body gracefully
+  const text = await res.text();
+  if (!text) {
+    return undefined as T;
+  }
+
+  return JSON.parse(text) as T;
 }
