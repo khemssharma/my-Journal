@@ -91,7 +91,7 @@ export default function HomePage() {
   function handleEdit(entry: JournalEntry) {
     setTitle(entry.title);
     setContent(entry.content);
-    setEditingId(entry.id.timestamp); // assuming id has timestamp
+    setEditingId(entry.id);
   }
 
   useEffect(() => {
@@ -172,7 +172,7 @@ export default function HomePage() {
       <div>
         <h2 className="text-xl font-semibold mb-2">Your Journals</h2>
         {journals.map((j) => (
-          <div key={j.id.timestamp} className="mb-4 p-4 border rounded">
+          <div key={j.id} className="mb-4 p-4 border rounded">
             <h3 className="text-lg font-bold">{j.title}</h3>
             <p>{j.content}</p>
             <small className="text-gray-500">
@@ -187,7 +187,7 @@ export default function HomePage() {
               </button>
               <button
                 className="bg-red-500 text-white px-3 py-1"
-                onClick={() => handleDelete(j.id.timestamp)}
+                onClick={() => handleDelete(j.id)}
               >
                 Delete
               </button>

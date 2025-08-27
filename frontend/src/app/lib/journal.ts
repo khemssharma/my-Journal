@@ -1,17 +1,11 @@
 // lib/journal.ts
 import { apiFetch } from "./api";
 
-// Based on your sample response
-export interface JournalEntryId {
-  timestamp: number;
-  date: string; // ISO string
-}
-
 export interface JournalEntry {
-  id: JournalEntryId; // backend shows an object here
+  id: string;            // now just a string
   title: string;
   content: string;
-  date: string; // ISO string
+  date: string;          // ISO string
 }
 
 // Create
@@ -25,6 +19,11 @@ export async function createEntry(title: string, content: string): Promise<Journ
 // Read all
 export async function getEntries(): Promise<JournalEntry[]> {
   return apiFetch<JournalEntry[]>("/journal");
+}
+
+// Read one
+export async function getEntryById(id: string): Promise<JournalEntry> {
+  return apiFetch<JournalEntry>(`/journal/id/${id}`);
 }
 
 // Update
@@ -45,11 +44,7 @@ export async function deleteEntry(id: string): Promise<void> {
   });
 }
 
-/**
- * Helper: safe React key if you don't have the string id.
- * Falls back to timestamp since your payload nests id.
- */
+// Helper: safe React key
 export function entryKey(e: JournalEntry): string {
-  // If your backend later returns a string id, use that instead.
-  return `${e.id?.timestamp ?? ""}-${e.date}`;
+  return e.id;
 }
